@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Model\Frilinks;
 use App\Model\Shopusers;
 use App\Model\Shoptypes;
+use App\Model\Goods;
+use App\Model\Goodtypes;
+
 
 class IndexController extends Controller
 {
@@ -28,7 +31,7 @@ class IndexController extends Controller
     }
     //店铺首页
     public function shopshow($id){
-    	
-    	return view('home.shopshow');
+    	$goodtypes = Goodtypes::where('shopid',$id)->get();
+    	return view('home.shopshow',['goodtypes'=>$goodtypes]);
     }
 }
