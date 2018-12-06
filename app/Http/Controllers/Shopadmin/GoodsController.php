@@ -77,7 +77,7 @@ class GoodsController extends Controller
 
         }
 
-
+        $xxcps['suid'] = session('shopinfo')->id;
         try{
 
             $data = Goods::create($xxcps);

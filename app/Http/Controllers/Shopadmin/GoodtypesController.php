@@ -45,10 +45,12 @@ class GoodtypesController extends Controller
     public function store(Request $request)
     {
         //
-        $cplbs = $request->input();
-        try{
 
-            $data = Goodtypes::create($cplbs);
+        try{
+            $res = new Goodtypes;
+            $res -> lbname = $request->input('lbname');
+            $res -> shopid = session('shopinfo')->id;
+            $data = $res -> save();
 
             if($data){
                 return redirect('/shopadmin/cplb')->with('success','添加成功');
