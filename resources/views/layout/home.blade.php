@@ -5,19 +5,22 @@
         <meta charset="utf-8" />
         <title>@yield('title')</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+      
         <link rel="icon" href="/home/images/logo.png" type="image/x-icon"/>
-        <link href="/home/style/style.css" rel="stylesheet" type="text/css" />
-        <!-- <link rel="stylesheet" type="text/css" href="/home/style/hzw-city-picker.css"> -->
+       @section('css') 
+        <link href="/home/style/style.css" rel="stylesheet" type="text/css" />      
         <link rel="stylesheet" type="text/css" href="/home/style/manhuaDialog.1.0.css">
         <script type="text/javascript" src="/home/js/public.js"></script>
         <script type="text/javascript" src="/home/js/jquery.js"></script>
-<script type="text/javascript" src="/home/js/manhuaDialog.1.0.js"></script>
+		<script type="text/javascript" src="/home/js/manhuaDialog.1.0.js"></script>
         <script type="text/javascript" src="/home/js/jqpublic.js"></script>
-        <!-- <link rel="stylesheet" type="text/css" href="/home/vendor/bootstrap/css/bootstrap.min.css"> -->
+
+       
     <link rel="stylesheet" type="text/css" href="/home/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="/home/fonts/iconic/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="/home/css/util.css">
     <link rel="stylesheet" type="text/css" href="/home/css/main.css">
+
 <style type="text/css">
 
     .Cfn .F-middle .rslides_tabs{
@@ -41,6 +44,7 @@
         z-index:9990;
     }
 </style>
+@show
       <script type="text/javascript">
         $(function (){
             $("#denglus").manhuaDialog({
