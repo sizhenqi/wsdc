@@ -32,32 +32,31 @@
  <aside class="N-right">
   <div class="N-title">本周推荐<i> Recommended this week</i></div>
   <ul class="Orderlist" id="UpRoll">
+   @foreach($shop as $k => $v)
+   @php
+          $l = explode('|',$v->wzzb)[0];
+          $r = explode('|',$v->wzzb)[1];
+          $distance = distanceBetween($l,$r,session('dqwz')['dqwzlng'],session('dqwz')['dqwzlat']);
+        @endphp
+        @if($v->shstatus == 2)
+        @if($v->status == 1)
+        @if($distance <= $v-> psjl)
+        @if($v->tuijian == 2)
+   <a href='/shop/show/{{$v->id}}'>
    <li>
-     <p><img src="/shoppic/laobeijing.jpg" width=""></p>
-     <p>收件人：1</p>
-     <p>订单状态：<i class="State01">已发货</i></p>
+     <p><img src="{{$v->logo}}" width="150" height="82"></p>
+     <p><b>{{$v->shopname}}</b></p>
+     <p>地址：{{$v->address}}</p>
+     <p>电话：{{$v->tel}}</p>
    </li>
+ </a>
+   @endif
+   @endif
+   @endif
+   @endif
+  @endforeach
 
 
-   <li>
-     <p><img src="/shoppic/taishanghuang.jpg" width=""></p>
-     <p>收件人：2</p>
-     <p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>
-   </li>
-
-
-   <li>
-     <p><img src="/shoppic/laobeijing.jpg" width=""></p>
-     <p>收件人：3</p>
-     <p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>
-   </li>
-  
-   <li>
-     <p><img src="/shoppic/taishanghuang.jpg" width=""></p>
-     <p>收件人：4</p>
-     <p>订单状态：<i class="State02">已签收</i><i class="State03">已点评</i></p>
-   </li>
-   
   </ul>
   <script>
    var UpRoll = document.getElementById('UpRoll');
@@ -94,7 +93,7 @@
     <li>
     <p class="seekarea" style="float: right;border: 0px">
     @foreach($shoptype as $k => $v)
-    <a href="#">{{$v->type}}</a>
+    <a href="/shoptype/{{$v->id}}">{{$v->type}}</a>
     @endforeach
     
      </p>
@@ -105,10 +104,11 @@
           $r = explode('|',$v->wzzb)[1];
           $distance = distanceBetween($l,$r,session('dqwz')['dqwzlng'],session('dqwz')['dqwzlat']);
         @endphp
+         @if($v->shstatus == 2)
         @if($distance <= $v-> psjl)
-       <a href="/shop/show/{{$v->id}}" target="_blank" title="{{$v->shopname}}">
+       <a href=@if($v->status == 1) "/shop/show/{{$v->id}}" @else "javascript:void(0)" @endif target="_blank" title="{{$v->shopname}}">
        <figure>
-       <img src="{{$v->logo}}">
+       <img src=@if($v->status == 1) "{{$v->logo}}" @else "/close.png" @endif>
        <figcaption>
        <span class="title">{{$v->shopname}}</span>
        <span class="price">预定折扣：<i>8.9折</i></span>
@@ -118,6 +118,7 @@
        <p class="p3">店铺地址：{{$v->address}}</p>
        </figure>
       </a>
+        @endif
         @endif
       @endforeach
      </div>

@@ -47,6 +47,7 @@ class ShopuserController extends Controller
             $data = shopusers::find(43)->update($shopuser);
 
             if($data){
+               
                 return redirect('/shopadmin/shopuser')->with('success','修改成功');
             }
 

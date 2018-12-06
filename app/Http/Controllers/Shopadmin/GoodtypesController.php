@@ -18,7 +18,7 @@ class GoodtypesController extends Controller
     {
         //
 
-        $cplbs = Goodtypes::select()->get();
+        $cplbs = Goodtypes::where('shopid',session('shopinfo')->id)->get();
 
 
         return view('/shopadmin/goodtypes/index',['cplbs'=>$cplbs]);

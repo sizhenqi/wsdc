@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <th style='text-align: right'>店铺图片:</th>
-                <th style='text-align: left'><img src="{{$suser->logo}}"></th>
+                <th style='text-align: left'><img width="200" src="{{$suser->logo}}"></th>
             </tr>
             <tr>
                 <th style='text-align: right'>店铺电话:</th>

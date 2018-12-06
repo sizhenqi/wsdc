@@ -357,7 +357,7 @@
                         <a href="user_orderlist.html" title="我的订单">我的订单</a>
                         <a href="cart.html">购物车（0）</a>
                         <a href="user_favorites.html" title="我的收藏">我的收藏</a>
-                        <a href="#">商家入驻</a>
+                      
                     </div>
                 </div>
                 @endif
@@ -375,13 +375,13 @@
                         @endif</a></span>
                   </div>
                 <div class="Search">
-                    <form method="get" id="main_a_serach" onsubmit="return check_search(this)">
+                    <form method="post" id="main_a_serach" action="/shop/search">
                         <div class="Search_nav" id="selectsearch">
                             <a class="choose">餐厅</a>
                             </div>
                         <div class="Search_area">
-
-                            <input type="search" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称..." class="searchbox" >
+                            <input type="text" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称..." class="searchbox" >
+                            {{csrf_field()}}
                             <input type="submit" class="searchbutton" value="搜 索" >
                         </div>
 

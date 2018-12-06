@@ -17,7 +17,7 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         //
-        $cplbs = Goodtypes::select()->get();
+        $cplbs = Goodtypes::where('shopid',session('shopinfo')->id)->get();
         if($request['name']){
         $xxcps = Goods::orderBy('id','asc')
             ->where(function($query) use($request){
@@ -28,21 +28,16 @@ class GoodsController extends Controller
                     $query->where('cpname','like','%'.$name.'%');
                 }
             })
-        ->paginate($request->input('num', 3));
+        ->where('suid',session('shopinfo')->id)->paginate($request->input('num', 3));
         $name = $request->input('name');
         } else {
-            $xxcps = Goods::paginate(3);
+            $xxcps = Goods::where('suid',session('shopinfo')->id)->paginate(3);
             if(!isset($name)){
                 $name="";
             }
         }
         return view('/shopadmin/goods/index',['xxcps'=>$xxcps,'cplbs'=>$cplbs,'name'=>$name]);
-        /*$cplbs = Goodtypes::select()->get();
-        $xxcps = Goods::paginate(3);
-        if(!isset($name)){
-            $name="";
-        }
-        return view('/shopadmin/goods/index',['xxcps'=>$xxcps,'cplbs'=>$cplbs,'name'=>$name]);*/
+  
     }
 
     /**
@@ -53,7 +48,7 @@ class GoodsController extends Controller
     public function create()
     {
         //
-        $cplbs = Goodtypes::select()->get();
+        $cplbs = Goodtypes::where('shopid',session('shopinfo')->id)->get();
 
         return view('/shopadmin/goods/create',['cplbs'=>$cplbs]);
     }
@@ -117,7 +112,7 @@ class GoodsController extends Controller
     public function edit($id)
     {
         //
-        $cplbs = Goodtypes::select()->get();
+        $cplbs = Goodtypes::where('shopid',session('shopinfo')->id)->get();
         $xxcps = Goods::find($id);
 
         return view('shopadmin/goods/edit',['cplbs'=>$cplbs,'xxcps'=>$xxcps]);
@@ -184,21 +179,5 @@ class GoodsController extends Controller
             return back()->with('error','删除失败');
         }
     }
-    public function  selects () {
-
-        $cplbs = Goodtypes::select()->get();
-        $xxcps = Buyusers::orderBy('id','asc')
-            ->where(function($query) use($request){
-                //检测关键字
-                $name = $request->input('name');
-                //如果用户名不为空
-                if(!empty($name)) {
-                    $query->where('cpname','like','%'.$name.'%');
-                }
-            })
-        ->paginate($request->input('num', 3));
-        $name = $request->input('name');
-        return view('/shopadmin/goods/index',['xxcps'=>$xxcps,'cplbs'=>$cplbs,'name'=>$name]);
-
-    }
+  
 }

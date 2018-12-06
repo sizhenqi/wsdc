@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Ready Bootstrap Dashboard</title>
+  <title>{{session('shopinfo')->shopname}}</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <link rel="stylesheet" href="/shopadmins/assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="/shopadmins/https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -13,8 +13,8 @@
   <div class="wrapper">
     <div class="main-header">
       <div class="logo-header">
-        <a href="/shopadmins/index.html" class="logo">
-          Ready Dashboard
+        <a href="/shopadmin" class="logo">
+          {{session('shopinfo')->shopname}}
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -24,28 +24,9 @@
       <nav class="navbar navbar-header navbar-expand-lg">
         <div class="container-fluid">
 
-          <form class="navbar-left navbar-form nav-search mr-md-3" action="">
-            <div class="input-group">
-              <input type="text" placeholder="Search ..." class="form-control">
-              <div class="input-group-append">
-                <span class="input-group-text">
-                  <i class="la la-search search-icon"></i>
-                </span>
-              </div>
-            </div>
-          </form>
+       
           <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-            <li class="nav-item dropdown hidden-caret">
-              <a class="nav-link dropdown-toggle" href="/shopadmins/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="la la-envelope"></i>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/shopadmins/#">Action</a>
-                <a class="dropdown-item" href="/shopadmins/#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/shopadmins/#">Something else here</a>
-              </div>
-            </li>
+       
             <li class="nav-item dropdown hidden-caret">
               <a class="nav-link dropdown-toggle" href="/shopadmins/#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="la la-bell"></i>
@@ -53,7 +34,7 @@
               </a>
               <ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
                 <li>
-                  <div class="dropdown-title">You have 4 new notification</div>
+                  <div class="dropdown-title">你有多少条未读信息</div>
                 </li>
                 <li>
                   <div class="notif-center">
@@ -102,28 +83,10 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="/shopadmins/#" aria-expanded="false"> <img src="/shopadmins/assets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span >Hizrian</span></span> </a>
-              <ul class="dropdown-menu dropdown-user">
-                <li>
-                  <div class="user-box">
-                    <div class="u-img"><img src="/shopadmins/assets/img/profile.jpg" alt="user"></div>
-                    <div class="u-text">
-                      <h4>Hizrian</h4>
-                      <p class="text-muted">hello@themekita.com</p><a href="/shopadmins/profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
-                    </div>
-                  </li>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/shopadmins/#"><i class="ti-user"></i> My Profile</a>
-                  <a class="dropdown-item" href="/shopadmins/#"></i> My Balance</a>
-                  <a class="dropdown-item" href="/shopadmins/#"><i class="ti-email"></i> Inbox</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/shopadmins/#"><i class="ti-settings"></i> Account Setting</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="/shopadmins/#"><i class="fa fa-power-off"></i> Logout</a>
-                </ul>
-                <!-- /.dropdown-user -->
-              </li>
+            <li><a href="/shopadmin/dologout">退出登录</a></li>
+               
+     
+             
             </ul>
           </div>
         </nav>
@@ -132,14 +95,14 @@
         <div class="scrollbar-inner sidebar-wrapper">
           <div class="user">
             <div class="photo">
-              <img src="/shopadmins/assets/img/profile.jpg">
+              <img src="{{session('shopinfo')->logo}}">
             </div>
             <div class="info">
-              <a class="" data-toggle="collapse" href="/shopadmins/#collapseExample" aria-expanded="true">
+              <a class="" data-toggle="collapse" href="" aria-expanded="true">
                 <span>
-                  Hizrian
-                  <span class="user-level">Administrator</span>
-                  <span class="caret"></span>
+                  {{session('shopinfo')->name}}
+                  <span class="user-level"> {{session('shopinfo')->address}}</span>
+               
                 </span>
               </a>
               <div class="clearfix"></div>
@@ -179,7 +142,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="/shopadmin/xxcp">
+              <a href="/shopadmin/ddgl">
                 <i class="la la-certificate"></i>
                 <p>订单管理</p>
               </a>
@@ -196,6 +159,25 @@
       <div class="main-panel">
         <div class="content">
     @section('content')
+
+
+
+
+  
+    <img src="/sp.jpg" style="width:1610px;height: 810px">
+
+
+
+
+
+
+
+
+
+
+
+
+
     @show
         </div>
       </div>
@@ -229,7 +211,7 @@
 <script src="/shopadmins/assets/js/core/bootstrap.min.js"></script>
 <script src="/shopadmins/assets/js/plugin/chartist/chartist.min.js"></script>
 <script src="/shopadmins/assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
-<script src="/shopadmins/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
 <script src="/shopadmins/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
 <script src="/shopadmins/assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="/shopadmins/assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>

@@ -48,30 +48,38 @@ Route::post('/shopuser/zhuce/do','Shopuser\UserController@dozhuce');
 
 //商家首页
 Route::get('/shop/show/{id}','Home\IndexController@shopshow');
-
-
+Route::post('/shop/search','Home\SearchController@search');
+Route::get('/shoptype/{id}','Home\SearchController@typeshow');
 
 //史云鹏--------------------------------------------------------------------------------------------------
 //商家后台
-	//商家后台的首页
-    Route::get('/shopadmin', 'Shopadmin\GoodtypesController@index');
-    //商家菜品分类
-    Route::resource('/shopadmin/cplb',"Shopadmin\GoodtypesController");
-    //商家菜品的详细
-    Route::resource('/shopadmin/xxcp',"Shopadmin\GoodsController");
-    //商家菜品的分页搜索
-    Route::get('/shopadmin/xxcps', 'Shopadmin\GoodsController@index');
-
-
-    //商家后台的登录
-	Route::get('/shopadmin/loging', 'Shopadmin\ShoplogingController@loging');
+	//商家后台的登录
+	Route::get('/shopadmin/login', 'Shopadmin\ShoplogingController@loging');
     Route::post('/shopadmin/dologin', 'Shopadmin\ShoplogingController@dologin');
-	//商家的信息
-	Route::get('/shopadmin/shopuser', 'Shopadmin\ShopuserController@index');
-	//商家信息的修改
-	Route::get('/shopadmin/edit', 'Shopadmin\ShopuserController@edit');
-	Route::post('/shopadmin/update', 'Shopadmin\ShopuserController@update');
+	//商家后台的首页
+	Route::group(['middleware' => 'shopadminlogin'], function (){
+	    Route::get('/shopadmin', function(){
+	    	return view('layout.shophome');
+	    });
+	    //商家菜品分类
+	    Route::resource('/shopadmin/cplb',"Shopadmin\GoodtypesController");
+	    //商家菜品的详细
+	    Route::resource('/shopadmin/xxcp',"Shopadmin\GoodsController");
+	    //商家菜品的分页搜索
+	    Route::get('/shopadmin/xxcps', 'Shopadmin\GoodsController@index');
+	    
+		//商家的信息
+		Route::get('/shopadmin/shopuser', 'Shopadmin\ShopuserController@index');
+		//商家信息的修改
+		Route::get('/shopadmin/edit', 'Shopadmin\ShopuserController@edit');
+		Route::post('/shopadmin/update', 'Shopadmin\ShopuserController@update');
+		//退出登录
+		Route::get('/shopadmin/dologout', 'Shopadmin\ShoplogingController@logout');
 
+	});
+
+
+   
 	
 //马占吉-----------------------------------------------------------------------------------------------
 	//后台友情链接

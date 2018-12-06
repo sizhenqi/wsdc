@@ -20,13 +20,9 @@ class ShoplogingController extends Controller
 
     public function dologin(Request $request)
     {
-        // dd(session('code'));
 
         $name = $request -> post('shopname');
-        // dd($uname);
         $pass = $request -> post('shoppass');
-
-        //dd($code);
 
         $res = Shopusers::where('name',$name)->first();
         if(!$res){
@@ -39,14 +35,12 @@ class ShoplogingController extends Controller
             return back() -> with('error','用户名或者密码错误');
 
         }
-        session(['shopid' => $res->id]);
-        session(['shopname' => $res->name]);
-        session(['shoplogo' => $res->logo]);
-
-
-
+        session(['shopinfo' => $res]);
         return redirect('/shopadmin');
+    }
 
-
+    public function logout(){
+        session(['shopinfo'=>'']);
+        return back();
     }
 }

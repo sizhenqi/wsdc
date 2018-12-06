@@ -23,20 +23,20 @@
             @if($xxcps->zs == 1)
                 <label class="form-radio-label">
                     <input class="form-radio-input" type="radio" name="zs" value="1" checked="" >
-                    <span class="form-radio-sign">展示</span>
+                    <span class="form-radio-sign">有货</span>
                 </label>
                 <label class="form-radio-label ml-3">
                     <input class="form-radio-input" type="radio" name="zs" value="2">
-                    <span class="form-radio-sign">隐藏</span>
+                    <span class="form-radio-sign">已卖光</span>
                 </label>
             @else
                 <label class="form-radio-label">
                     <input class="form-radio-input" type="radio" name="zs" value="1"  >
-                    <span class="form-radio-sign">展示</span>
+                    <span class="form-radio-sign">有货</span>
                 </label>
                 <label class="form-radio-label ml-3">
                     <input class="form-radio-input" type="radio" name="zs" value="2" checked="">
-                    <span class="form-radio-sign">隐藏</span>
+                    <span class="form-radio-sign">已卖光</span>
                 </label>
             @endif
         </div>
@@ -50,7 +50,7 @@
             <textarea class="form-control" id="comment" rows="5" name="cpms">{{$xxcps->cpms}}</textarea>
         </div>
         <div class="form-group">
-            <label for="squareInput">菜品名称</label>
+            <label for="squareInput">菜品价钱</label>
             <input type="text" class="form-control input-square" id="squareInput" name="price" value="{{$xxcps->price}}" >
         </div>
     <div class="form-group" >

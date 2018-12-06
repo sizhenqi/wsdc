@@ -29,6 +29,10 @@ class BuyuserController extends Controller
         if($ename){
             return '该用户已存在';
         }
+        $tel = Buyusers::where('phone',$request->input('telnumber'))->first();
+        if($tel){
+            return '该手机号已被注册';
+        }
         if(!$request->input('pass') ){
             return '密码不能为空';
         }

@@ -80,15 +80,15 @@
                 @endforeach
             </td>
             <td style='text-align: center'>{{$xxcp->cpms}}</td>
-            <td style='text-align: center'>{{$xxcp->price}}￥</td>
+            <td style='text-align: center'>￥{{$xxcp->price}}</td>
             <td style='text-align: center'>
                 <img src="{{$xxcp->cppic}}" width="70">
             </td>
             <td style='text-align: center'>
                 @if($xxcp->zs == 1)
-                    展示
+                    有货
                 @else
-                    隐藏
+                    已卖光
                 @endif
             </td>
             <td style='text-align: center'>
