@@ -75,6 +75,11 @@
             border: 1px #dddddd solid;
             overflow: hidden;
         }
+        .Logo_search .Search .Search_area .searchbox {
+           
+            height: 21px;
+          
+        }
     </style>
 @stop
 @section('content')
@@ -126,14 +131,15 @@
 
                         <div class="otherinfor">
                             <a href="#" class="icoa">
-                                <img src="images/collect.png">
-                                收藏店铺（1293）
-                            </a>
-                            <div class="bshare-custom">
-                                <a title="分享" class="bshare-more bshare-more-icon more-style-addthis">
-                                    分享
-                                </a>
-                            </div>                                                                                
+                                <img src="/collect.png">
+                                收藏店铺
+                            </a>                                                                               
+                        </div>
+                         <div class="otherinfor">
+                            <a href="#" class="icoa">
+                                <img width="20" src="/fx.png">
+                                分享
+                            </a>                                                                               
                         </div>
                     </div>
                 </div>

@@ -32,7 +32,7 @@
  <aside class="N-right">
   <div class="N-title">本周推荐<i> Recommended this week</i></div>
   <ul class="Orderlist" id="UpRoll">
-   @foreach($shop as $k => $v)
+   @foreach($shopusers as $k => $v)
    @php
           $l = explode('|',$v->wzzb)[0];
           $r = explode('|',$v->wzzb)[1];

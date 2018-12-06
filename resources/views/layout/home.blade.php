@@ -43,6 +43,7 @@
     #忘记密码{
         z-index:9990;
     }
+    
 </style>
 @show
       <script type="text/javascript">
@@ -383,8 +384,8 @@
                         <div class="Search_nav" id="selectsearch">
                             <a class="choose">餐厅</a>
                             </div>
-                        <div class="Search_area">
-                            <input type="text" id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称..." class="searchbox" >
+                        <div class="Search_area" >
+                            <input type="text"   id="fkeyword" name="keyword" placeholder="请输入您所需查找的餐厅名称..." class="searchbox" >
                             {{csrf_field()}}
                             <input type="submit" class="searchbutton" value="搜 索" >
                         </div>
@@ -393,16 +394,6 @@
                 </div>
             </div>
             <nav class="menu_bg">
-                <ul class="menu">
-                    <li>
-                        <a href="index.html">首页</a></li>
-                    <li>
-                        <a href="list.html">订餐</a></li>
-                    <li>
-                        <a href="category.html">积分商城</a></li>
-                    <li>
-                        <a href="">关于我们</a></li>
-                </ul>
             </nav>
 
         </header>
