@@ -12,7 +12,7 @@ class ShopuserController extends Controller
     //
     public function index () {
 
-        $suser = Shopusers::find(43);
+        $suser = Shopusers::find(session('shopinfo')->id);
         $types = Shoptypes::find($suser->stid);
 
 
