@@ -99,7 +99,7 @@
     
      </p>
      <div class="DCcontent">
-      @foreach($shop as $k => $v)
+      @foreach($shopusers as $k => $v)
         @php
           $l = explode('|',$v->wzzb)[0];
           $r = explode('|',$v->wzzb)[1];

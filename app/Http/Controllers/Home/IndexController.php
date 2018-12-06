@@ -26,12 +26,23 @@ class IndexController extends Controller
 		//店铺类别
 		$shoptype = Shoptypes::get();
 		//所有商铺
-		$shop = Shopusers::get();
-	    return view('home/index',['frilinks'=>$frilinks,'shoptype'=>$shoptype,'shop'=>$shop]);
+		$shopusers = Shopusers::get();
+	    return view('home/index',[
+	    	'frilinks'=>$frilinks,
+	    	'shoptype'=>$shoptype,
+	    	'shopusers'=>$shopusers
+	    ]);
     }
     //店铺首页
     public function shopshow($id){
     	$goodtypes = Goodtypes::where('shopid',$id)->get();
-    	return view('home.shopshow',['goodtypes'=>$goodtypes]);
+    	$goods = Goods::get();
+    	$shopusers = Shopusers::find($id);
+    	//dd(shopusers);
+    	return view('home.shopshow',[
+    		'goodtypes'=>$goodtypes,
+    		'goods'=>$goods,
+    		'shopusers'=>$shopusers
+    	]);
     }
 }
