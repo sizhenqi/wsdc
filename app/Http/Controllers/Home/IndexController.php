@@ -9,6 +9,7 @@ use App\Model\Shopusers;
 use App\Model\Shoptypes;
 use App\Model\Goods;
 use App\Model\Goodtypes;
+use App\Model\Carts;
 
 
 class IndexController extends Controller
@@ -38,11 +39,13 @@ class IndexController extends Controller
     	$goodtypes = Goodtypes::where('shopid',$id)->get();
     	$goods = Goods::get();
     	$shopusers = Shopusers::find($id);
-    	//dd(shopusers);
+    	$res = Carts::where('uid',session('uinfo')->id)->where('shopid',$id)->get();
     	return view('home.shopshow',[
     		'goodtypes'=>$goodtypes,
     		'goods'=>$goods,
-    		'shopusers'=>$shopusers
+    		'shopusers'=>$shopusers,
+            'dpid' => $id,
+            'cart'=>$res
     	]);
     }
 }

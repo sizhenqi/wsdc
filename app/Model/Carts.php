@@ -4,16 +4,15 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Login extends Model
+class Carts extends Model
 {
-    //
-    //
+     //
      /**
      * 与模型关联的数据表
      *
      * @var string
      */
-    protected $table = 'adminusers';
+    protected $table = 'cart';
 
 
     protected $primaryKey = 'id';
@@ -33,5 +32,4 @@ class Login extends Model
 	 * @var array
 	 */
 	protected $guarded = [];
-
 }

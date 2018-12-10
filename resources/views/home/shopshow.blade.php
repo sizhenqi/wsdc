@@ -6,8 +6,212 @@
     <script type="text/javascript" src="/home/js/public.js"></script>
     <script type="text/javascript" src="/home/js/jquery.js"></script>
     <script type="text/javascript" src="/home/js/jqpublic.js"></script>
-    <script type="text/javascript" src="/home/js/cart.js"></script>
+    <!-- <script type="text/javascript" src="/home/js/cart.js"></script> -->
     <script type="text/javascript" src="/home/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        
+    
+
+$(document).ready(function () {
+    // 全选        
+    $(".allselect").click(function () {
+        $(".gwc_tb2 input[name=newslist]").each(function () {
+            $(this).attr("checked", true);
+        });
+        GetCount();
+    });
+
+    //反选
+    $("#invert").click(function () {
+        $(".gwc_tb2 input[name=newslist]").each(function () {
+            if ($(this).attr("checked")) {
+                $(this).attr("checked", false);
+
+            } else {
+                $(this).attr("checked", true);
+
+            } 
+        });
+        GetCount();
+    });
+    //取消
+    $("#cancel").click(function () {
+        $(".gwc_tb2 input[name=newslist]").each(function () {
+            $(this).attr("checked", false);
+
+        });
+        GetCount();
+    });
+
+    // 所有复选(:checkbox)框点击事件
+    $(".gwc_tb2 input[name=newslist]").click(function () {
+        if ($(this).attr("checked")) {
+
+        } else {
+
+        }
+    });
+
+    // 输出
+    $(".gwc_tb2 input[name=newslist]").click(function () {
+
+        GetCount();
+    });
+});
+//******************
+function GetCount() {
+    var conts = 0;
+    var aa = 0;
+    $(".gwc_tb2 input[name=newslist]").each(function () {
+        if ($(this).attr("checked")) {
+            for (var i = 0; i < $(this).length; i++) {
+                conts += parseInt($(this).val());
+                aa += 1;
+            }
+        }
+    });
+    $("#shuliang").text(aa);
+    $("#zong1").html((conts).toFixed(2));
+    $("#jz1").css("display", "none");
+    $("#jz2").css("display", "block");
+}
+//ADD:对删除链接进行处理2014-9-20DeathGhost
+    $(document).ready(function(){
+        $("#delcart1").click(function(){
+            $("#table1").remove();
+            });
+        $("#delcart2").click(function(){
+            $("#table2").remove();
+            });
+        });
+
+    $(function () {
+        var t = $("#text_box2");
+        $("#add2").click(function () {
+            t.val(parseInt(t.val()) + 1)
+            setTotal(); GetCount();
+        })
+        $("#min2").click(function () {
+            t.val(parseInt(t.val(1)) - 1)
+            t.val(1)//初始值防止为负数ADD deathghost
+            setTotal(); GetCount();
+        })
+        function setTotal() {
+            $("#total2").html((parseInt(t.val()) * 59).toFixed(2));
+            $("#newslist-2").val(parseInt(t.val()) * 59);
+        }
+        setTotal();
+    })
+    $(function () {
+        var t = $("#text_box1");
+        $("#add1").click(function () {
+            t.val(parseInt(t.val()) + 1)
+            setTotal(); GetCount();
+        })
+        $("#min1").click(function () {
+            t.val(parseInt(t.val()) - 1)
+            t.val(1)//初始值防止为负数ADD deathghost
+            setTotal(); GetCount();
+        })
+        function setTotal() {
+
+            $("#total1").html((parseInt(t.val()) * 59).toFixed(2));
+            $("#newslist-1").val(parseInt(t.val()) * 59);
+        }
+        setTotal();
+    })
+
+    $(function () {
+        $(".quanxun").click(function () {
+            setTotal();
+            //alert($(lens[0]).text());
+        });
+        function setTotal() {
+            var len = $(".tot");
+            var num = 0;
+            for (var i = 0; i < len.length; i++) {
+                num = parseInt(num) + parseInt($(len[i]).text());
+
+            }
+            //alert(len.length);
+            $("#zong1").text(parseInt(num).toFixed(2));
+            $("#shuliang").text(len.length);
+        }
+        //setTotal();
+    })
+//add to cart shoppage
+var data = {"total":0,"rows":[]};
+        var totalCost = 0;
+        
+        $(function(){
+            $('#cartcontent').datagrid({
+                singleSelect:true
+            });
+            $('.item').draggable({
+                revert:true,
+                proxy:'clone',
+                onStartDrag:function(){
+                    $(this).draggable('options').cursor = 'not-allowed';
+                    $(this).draggable('proxy').css('z-index',2);
+                },
+                onStopDrag:function(){
+                    $(this).draggable('options').cursor='move';
+                }
+            });
+                $('.cart').droppable({
+                    onDragEnter:function(e,source){
+                       
+                        $(source).draggable('options').cursor='auto';
+                    },
+                    onDragLeave:function(e,source){
+                        
+                        $(source).draggable('options').cursor='not-allowed';
+                    },
+                    onDrop:function(e,source){
+                       
+                        var name = $(source).find('p:eq(0)').html();
+                        var price = $(source).find('p:eq(1)').html();
+                        
+                        var cpid =  $(source).find('p:eq(0)').attr('cpid');
+                        var cpjg = $(source).find('p:eq(1)').attr('price');
+                        
+                        $.post('/addgwc',{'shopid':{{$dpid}},'_token':'{{csrf_token()}}','cpid':cpid,'cpjg':cpjg,'cpname':name},function(data){
+                            if(data == 1){
+                                alert('请先清空别家店铺的购物车后再试！！');
+
+                            }
+                            location.reload();
+                        });
+                    }
+                });
+        });
+        
+       function addProduct(name,price){
+            function add(){
+                for(var i=0; i<data.total; i++){
+                    var row = data.rows[i];
+                    if (row.name == name){
+                        row.quantity += 1;
+                        return;
+                    }
+                }
+                data.total += 1;
+                data.rows.push({
+                    name:name,
+                    quantity:1,
+                    price:price
+                });
+            }
+            add();
+            totalCost += price;
+            $('#cartcontent').datagrid('loadData', data);
+            var totle = $('div.cart .total').html();
+            $('div.cart .total').html(parseInt(totle)+parseInt(totalCost));
+        }
+
+
+
+    </script>
     <script>
         $(function() {
             $('.title-list li').click(function() {
@@ -35,6 +239,7 @@
             var Topcart = document.getElementById("Topcart");
             var mt = Topcart.offsetTop;
             window.onscroll = function() {
+               
                 var t = document.documentElement.scrollTop || document.body.scrollTop;
                 if (t > mt) {
                     Topcart.style.position = "fixed";
@@ -179,15 +384,15 @@
                                  @foreach($goods as $key => $val)
                                  @if($val->gtid == $v->id)
                                     <li>
-                                        <a href="detailsp.html" target="_blank" title="{{$val->cpname}}">
+                                        <a href="javascript:void(0)" target="_blank" title="{{$val->cpname}}">
                                             <img src="{{$val->cppic}}" class="foodsimgsize">
                                         </a>
                                         <a href="#" class="item">
                                             <div>
-                                                <p>
+                                                <p cpid='{{$val->id}}'>
                                                     {{$val->cpname}}
                                                 </p>
-                                                <p class="AButton">
+                                                <p class="AButton" price='{{$val->price}}'>
                                                     拖至购物车:￥{{$val->price}}
                                                 </p>
                                             </div>
@@ -340,7 +545,7 @@
         <aside>
             <div class="cart" id="Topcart">
                 <span class="Ctitle Block FontW Font14">
-                    <a href="cart.html" target="_blank">
+                    <a href="" target="_blank">
                         我的购物车
                     </a>
                 </span>
@@ -357,71 +562,49 @@
                                 价格
                             </th>
                         </tr>
+                        @php
+                            $totle = 0;
+                        @endphp
+                        @foreach($cart as $k => $v)
+                        @php
+                            $totle += $v->price;
+                        @endphp
+                        <tr>
+                            <th width="33%" align="center" field="name">
+                                {{$v->fname}}
+                            </th>
+                            <th width="33%" align="center" field="quantity">
+                                {{$v->count}}
+                            </th>
+                            <th width="33%" align="center" field="price">
+                                {{$v->price}}
+                            </th>
+                        </tr>
+                        
+                        @endforeach
+
+
                     </thead>
+                    
+                        
+                    
+                      
+
+                        
                 </table>
                 <p class="Ptc">
                     <span class="Cbutton">
-                        <a href="cart.html" target="进入购物车">
+                        <a href="/cart" target="进入购物车">
                             进入购物车
                         </a>
                     </span>
                     <span class="total">
-                        共计金额: ￥0
+                        总金额：￥{{$totle}}
                     </span>
                 </p>
             </div>
-            <div class="Nearshop">
-                <span class="Nstitle">
-                    附近其他店铺
-                </span>
-                <ul>
-                    <li>
-                        <img src="upload/cc.jpg">
-                        <p>
-                            <span class="shopname" title="动态调用完整标题">
-                                <a href="detailsp.html" target="_blank" title="肯德基">
-                                    肯德基
-                                </a>
-                            </span>
-                            <span class="Discolor">
-                                距离：1.2KM
-                            </span>
-                            <span title="完整地址title">
-                                地址：西安市雁塔区2000号...
-                            </span>
-                        </p>
-                    </li>
-                </ul>
-            </div>
-            <div class="History">
-                <span class="Htitle">
-                    浏览历史
-                </span>
-                <ul>
-                    <li>
-                        <a href="detailsp.html" target="_blank" title="清真川菜馆">
-                            <img src="upload/cc.jpg">
-                        </a>
-                        <p>
-                            <span class="shopname" title="动态调用完整标题">
-                                <a href="detailsp.html" target="_blank" title="正宗陕北小吃城">
-                                    正宗陕北小吃城
-                                </a>
-                            </span>
-                            <span>
-                                西安市莲湖区土门十西安市莲湖区土门十字西安市莲湖区土门十字.
-                            </span>
-                        </p>
-                    </li>
-                    <span>
-                        [
-                        <a href="#">
-                            清空历史记录
-                        </a>
-                        ]
-                    </span>
-                </ul>
-            </div>
+            
+           
         </aside>
     </section>
     <!--End content-->

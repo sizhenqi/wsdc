@@ -349,6 +349,8 @@
                         <a id='denglus' href="javascript:void(0)">登录</a></div>
                        
                     <div class="RightNav">
+                        <a href="/shopadmin">我是商家</a></div>
+                        <div class="RightNav">
                         <a href="/shopuser/zhuce">商家入驻</a></div>
                 </div>
                 @else
