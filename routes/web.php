@@ -12,6 +12,8 @@ Route::post('/user/login','Home\BuyuserController@login');
 Route::get('/user/logout','Home\BuyuserController@logout');
 //qq第三方登录
 Route::any('/oauth/qq','Home\BuyuserController@qqRedirect');
+Route::any('/oauth/qq/callback','Home\BuyuserController@qqCallback');
+//qq绑定
 Route::any('/user/qq/no', 'Home\BuyuserController@noqq');
 Route::any('/user/qq/no/zc', 'Home\BuyuserController@noqqzc');
 Route::any('/user/qq/no/band', 'Home\BuyuserController@noqqband');
