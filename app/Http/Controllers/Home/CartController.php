@@ -76,4 +76,25 @@ class CartController extends Controller
     	$res->price -= $res->danjia;
     	$res->save();
     }
+
+    public function jiesuan($id)
+    {
+        $order = null;
+        $res = Carts::where('uid',session('uinfo')->id)->where('shopid',$id)->get();
+        foreach ($res as $k => $v) {
+            $order .= $v->count.'份'.$v->fname.'|';
+         }
+        $order = rtrim($order,'|');
+        return view('home.order',['res'=>$res,'order'=>$order,'shopid'=>$id]);
+    }
+    //阿里支付
+    public function zhifu(Request $request){
+        if(!$request->input('address')){
+            return back()->with('info','请添加地址');
+        }
+        if(!$request->input('phone')){
+            return back()->with('info','请填写手机号');
+        }
+        
+    }
 }

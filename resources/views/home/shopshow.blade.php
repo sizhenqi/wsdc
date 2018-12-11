@@ -594,7 +594,7 @@ var data = {"total":0,"rows":[]};
                 </table>
                 <p class="Ptc">
                     <span class="Cbutton">
-                        <a href="/cart" target="进入购物车">
+                        <a href="/cart/jiesuan/{{$dpid}}" target="进入购物车">
                             进入购物车
                         </a>
                     </span>
