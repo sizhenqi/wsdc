@@ -51,5 +51,6 @@ $app->singleton(
 | from the actual running of the application and sending responses.
 |
 */
-
+//Register Service Providers
+$app->register(Latrell\Alipay\AlipayServiceProvider::class);
 return $app;

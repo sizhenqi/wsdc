@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Carts;
 use App\Model\Goods;
+use App\Library\wappay\service\AlipayTradeService;
+use App\Library\AlipayTradeWapPayContentBuilder;
 
 class CartController extends Controller
 {
@@ -95,6 +97,8 @@ class CartController extends Controller
         if(!$request->input('phone')){
             return back()->with('info','请填写手机号');
         }
-        
+       
+
+       dd($request->input());
     }
 }
