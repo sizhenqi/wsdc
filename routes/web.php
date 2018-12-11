@@ -12,6 +12,7 @@ Route::post('/user/login','Home\BuyuserController@login');
 Route::get('/user/logout','Home\BuyuserController@logout');
 //qq第三方登录
 Route::any('/oauth/qq','Home\BuyuserController@qqRedirect');
+Route::any('/oauth/qq/callback', 'Home\BuyuserController@qqCallback');
 Route::any('/user/qq/no', 'Home\BuyuserController@noqq');
 Route::any('/user/qq/no/zc', 'Home\BuyuserController@noqqzc');
 Route::any('/user/qq/no/band', 'Home\BuyuserController@noqqband');
@@ -50,7 +51,8 @@ Route::get('/cart','Home\CartController@index');
 Route::get('/cart/add','Home\CartController@add');
 //点击减少一
 Route::get('/cart/min','Home\CartController@min');
-
+//进入订单页面
+Route::get('/cart/jiesuan/{id}','Home\CartController@jiesuan');
 
 
 

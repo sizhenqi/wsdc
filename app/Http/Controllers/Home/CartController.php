@@ -76,4 +76,10 @@ class CartController extends Controller
     	$res->price -= $res->danjia;
     	$res->save();
     }
+
+    public function jiesuan($id)
+    {
+        //dd($id);
+        return view('home.order',['id'=>$id]);
+    }
 }
